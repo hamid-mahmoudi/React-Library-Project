@@ -1,8 +1,8 @@
-const books = [
+let books = [
   {
     name: "The Last Wish",
     src: require("../assets/theLastWish.png"),
-    id: "01",
+    id: "1",
     author: "Andrzej Sapkowski",
     price: "196$",
     genre: "#Fantasy, #Adventure",
@@ -11,7 +11,7 @@ const books = [
   {
     name: "Sword of Destiny",
     src: require("../assets/swordOfDestiny.png"),
-    id: "02",
+    id: "2",
     author: "Andrzej Sapkowski",
     price: "217$",
     genre: "#Fantasy, #Novels, #Adventure",
@@ -20,7 +20,7 @@ const books = [
   {
     name: "Blood of Elves",
     src: require("../assets/bloodOfElves.png"),
-    id: "03",
+    id: "3",
     author: "Andrzej Sapkowski",
     price: "301$",
     genre: "#Dark-Fantasy, #Romance",
@@ -31,7 +31,7 @@ const books = [
   {
     name: "The Time of Contempt",
     src: require("../assets/theTimeOfContempt.png"),
-    id: "04",
+    id: "4",
     author: "Andrzej Sapkowski",
     price: "249$",
     genre: "#Epic, #Novels, #Drama",
@@ -39,7 +39,7 @@ const books = [
   },  {
     name: "Baptism of Fire",
     src: require("../assets/bapstimOfFire.png"),
-    id: "05",
+    id: "5",
     author: "Andrzej Sapkowski",
     price: "162$",
     genre: "#Political-Intrigue, #Novels, #Dark-Fantasy",
@@ -49,7 +49,7 @@ const books = [
   },  {
     name: "The Tower of Swallows",
     src: require("../assets/theTowerOfSwallows.png"),
-    id: "06",
+    id: "6",
     author: "Andrzej Sapkowski",
     price: "337$",
     genre: "#Fantasy, #Novels",
@@ -57,7 +57,7 @@ const books = [
   },  {
     name: "The Lady of The Lake",
     src: require("../assets/theLadyOfLake.png"),
-    id: "07",
+    id: "7",
     author: "Andrzej Sapkowski",
     price: "295 $",
     genre: "#Philosophical, #Epic",
@@ -65,7 +65,7 @@ const books = [
   },  {
     name: "Season of Storms",
     src: require("../assets/seasonOfStorms.png"),
-    id: "08",
+    id: "8",
     author: "Andrzej Sapkowski",
     price: "246$",
     genre: "#Epic,#Adventure, #Horror",
@@ -79,3 +79,7 @@ export const getBooks = () => {
 export const getBook = (id) => {
   return books.find((book) => book.id === id);
 };
+
+export const deleteBook=(id) =>{
+   books=books.filter(book=>book.id!==id)
+}
