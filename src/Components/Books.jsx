@@ -1,8 +1,10 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useSearchParams,useLocation } from "react-router-dom";
 import { getBooks } from "../data/data";
 
 const Books = () => {
+  const [searchParams,setSearchParams]=useSearchParams()
   const books = getBooks();
+  let location=useLocation()
   return (
     <div>
       <h3 className="p-4 ">My Books</h3>
@@ -18,6 +20,16 @@ const Books = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={searchParams.get("filter")}
+              onChange={event=>{
+                let filter=event.target.value
+                if(filter){
+                  setSearchParams({filter:filter})
+
+                }else{
+                  setSearchParams({})
+                }
+              }}
             />
             <button
               className="btn btn-outline-secondary  my-sm-0"
@@ -26,7 +38,15 @@ const Books = () => {
               Search
             </button>
           </form>
-          {books.map((book) => (
+          {books.filter(book=>{
+            let filter=searchParams.get("filter")
+            if (!filter) return true
+              let name=book.name.toLowerCase()
+              return name.includes(filter)
+          })
+          
+          
+          .map((book) => (
             <NavLink
               className="text-decoration-none py-2 rounded"
               style={({ isActive }) => {
@@ -35,12 +55,12 @@ const Books = () => {
                   fontWeight: isActive ? "normal" : "lighter",
                   border: isActive ? "2px solid #ade8f4" : "1px solid #ade8f4",
                   boxShadow: isActive ? "0px 0px 10px #ade8f4" : "",
-                  margin: isActive ? "25px 0" : "2px 0",
+                  margin: isActive ? "8px 0" : "2px 0",
                   scale: isActive ? "1.04" : "1",
                 };
               }}
-              to={book.id}
-              key={book.id}
+              to={`${book.id}${location.search}`}
+              key={`${book.id}${location.search}`}
             >
               {book.name}
             </NavLink>
